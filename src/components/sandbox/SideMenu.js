@@ -86,17 +86,19 @@ function SideMenu(props) {
     };
     return (
         <Sider trigger={null} collapsible collapsed={collapsed}>
-            <div className="logo">
-                <Avatar size="large" icon={<UserOutlined />} />
-                <span style={{ margin: '5px' }}>新闻发布系统</span>
+            <div style={{display: 'flex', height: '100%', flexDirection: 'column'}}>
+                <div className="logo">
+                    <Avatar size="large" icon={<UserOutlined />} />
+                    <span style={{ margin: '5px' }}>新闻发布系统</span>
+                </div>
+                <Menu style={{flex: '1', overflow: 'auto'}}
+                    onClick={onMenuClick}
+                    theme="dark"
+                    mode="inline"
+                    defaultSelectedKeys={['1']}  /* 菜单高亮 */
+                    items={menu}
+                />
             </div>
-            <Menu
-                onClick={onMenuClick}
-                theme="dark"
-                mode="inline"
-                defaultSelectedKeys={['1']}  /* 菜单高亮 */
-                items={menu}
-            />
         </Sider>
     )
 }
