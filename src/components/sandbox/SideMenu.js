@@ -84,6 +84,11 @@ function SideMenu(props) {
         // console.log('props ', props); // props.history.push
         props.history.push(e.key)
     };
+
+    //console.log(props.location); // props.location.pathname
+    const selectMenuKeys = [props.location.pathname]
+    const openMenuKeys = ["/" + props.location.pathname.split("/")[1]]
+    //console.log(openMenuKeys); // eg: ['/user-manage']
     return (
         <Sider trigger={null} collapsible collapsed={collapsed}>
             <div style={{display: 'flex', height: '100%', flexDirection: 'column'}}>
@@ -95,7 +100,10 @@ function SideMenu(props) {
                     onClick={onMenuClick}
                     theme="dark"
                     mode="inline"
-                    defaultSelectedKeys={['1']}  /* 菜单高亮 */
+                    /* 不成文规律：defaultxxx=yyy 非受控组件；  xxx=yyy 受控组件，可以解决 重定向到首页时首页菜单高亮问题 */
+                    //defaultSelectedKeys={selectMenuKeys}  /* 菜单高亮，页面刷新保持当前菜单高亮 */
+                    selectedKeys={selectMenuKeys}  /* 菜单高亮，页面刷新保持当前菜单高亮 */
+                    defaultOpenKeys={openMenuKeys}  /* 默认打开菜单 */
                     items={menu}
                 />
             </div>
