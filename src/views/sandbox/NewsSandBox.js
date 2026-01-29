@@ -26,6 +26,7 @@ export default function NewsSandBox() {
             margin: '24px 16px',
             padding: 24,
             minHeight: 280,
+            //overflow: 'auto', // 让内容在自己的 Content 容器内滚动；默认是视口滚动
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
           }}
