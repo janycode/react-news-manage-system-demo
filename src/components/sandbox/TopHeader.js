@@ -52,7 +52,7 @@ export default function TopHeader() {
                 }}
             />
 
-            <div style={{ float: 'right' }}>
+            <div style={{ float: 'right', marginRight: '20px' }}>
                 <span>欢迎 admin 回来！</span>
                 <Dropdown menu={{ items }}>
                     <Avatar size="large" icon={<UserOutlined />} />
