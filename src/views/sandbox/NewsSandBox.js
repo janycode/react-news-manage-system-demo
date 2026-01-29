@@ -7,6 +7,7 @@ import NoPermission from './nopermission/NoPermission'
 import RightList from './right-manage/RightList'
 import RoleList from './right-manage/RoleList'
 import UserList from './user-manage/UserList'
+import './NewsSandBox.min.css'
 
 const { Content } = Layout;
 

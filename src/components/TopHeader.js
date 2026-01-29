@@ -1,16 +1,44 @@
 import {
     MenuFoldOutlined,
-    MenuUnfoldOutlined
+    MenuUnfoldOutlined,
+    SmileOutlined,
+    UserOutlined
 } from '@ant-design/icons';
-import { Button, Layout, theme } from 'antd';
+import { Button, Layout, theme, Dropdown, Avatar } from 'antd';
 import { useState } from 'react';
 const { Header } = Layout;
 
 export default function TopHeader() {
     const [collapsed, setCollapsed] = useState(false);
     const {
-        token: { colorBgContainer, borderRadiusLG },
+        token: { colorBgContainer },
     } = theme.useToken();
+
+    const items = [
+        {
+            key: '1',
+            label: (
+                <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+                    超级管理员
+                </a>
+            ),
+            icon: <SmileOutlined />,
+            disabled: true,
+        },
+        {
+            key: '3',
+            label: (
+                <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
+                    权限设置
+                </a>
+            ),
+        },
+        {
+            key: '4',
+            danger: true,
+            label: '退出',
+        },
+    ];
     return (
         <Header style={{ padding: 0, background: colorBgContainer }}>
             <Button
@@ -23,6 +51,13 @@ export default function TopHeader() {
                     height: 64,
                 }}
             />
+
+            <div style={{ float: 'right' }}>
+                <span>欢迎 admin 回来！</span>
+                <Dropdown menu={{ items }}>
+                    <Avatar size="large" icon={<UserOutlined />} />
+                </Dropdown>
+            </div>
         </Header>
     )
 }
