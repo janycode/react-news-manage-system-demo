@@ -39,6 +39,9 @@ function SideMenu(props) {
             if (newItem.children && Array.isArray(newItem.children) && newItem.children.length) {
                 newItem.children = addMenuIcon(newItem.children);
             }
+            if (!newItem.children || !Array.isArray(newItem.children) || newItem.children.length === 0) {
+                delete newItem.children; // 非有效子菜单，直接删除children字段
+            }
             return newItem;
         });
     };
