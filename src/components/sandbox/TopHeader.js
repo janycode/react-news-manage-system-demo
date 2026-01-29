@@ -18,7 +18,7 @@ export default function TopHeader() {
         {
             key: '1',
             label: (
-                <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+                <a rel="noopener noreferrer">
                     超级管理员
                 </a>
             ),
@@ -28,7 +28,7 @@ export default function TopHeader() {
         {
             key: '3',
             label: (
-                <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
+                <a rel="noopener noreferrer" href="#/right-manage/right/list">
                     权限设置
                 </a>
             ),
