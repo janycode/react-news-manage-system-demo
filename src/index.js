@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 // import reportWebVitals from './reportWebVitals';
+import zhCN from 'antd/locale/zh_CN'; //国际化，支持中文（如筛选是重置按钮为英文 reset）
+import 'dayjs/locale/zh-cn';  // for date-picker i18n
+import { ConfigProvider } from 'antd';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
+  <ConfigProvider locale={zhCN}>  {/* 国际化，支持中文 */}
     <App />
+  </ConfigProvider>
   // </React.StrictMode>
 );
 
