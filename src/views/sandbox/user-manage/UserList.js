@@ -21,12 +21,25 @@ export default function UserList() {
   const [isUpdateDisabled, setIsUpdateDisabled] = useState(false)
   const [currentUpdate, setCurrentUpdate] = useState(null)
 
+  // 取出登陆用户信息
+  const { roleId, region, username } = JSON.parse(localStorage.getItem("token"))
+  const roleObj = {
+    "1": "superadmin",
+    "2": "admin",
+    "3": "editor"
+  }
+  console.log("roleId=", roleId, ", role=", roleObj[roleId]);
+  
   // 请求用户列表（含关联角色信息）
   useEffect(() => {
     axios.get("http://localhost:5000/users?_embed=role").then(res => {
       let list = res.data
       console.log("users list=", list);
-      setDataSource(list)
+      // 如果是超级管理员，则 list 全部给；如果不是则给出 用户名 和 符合区域+角色 的数据
+      setDataSource(roleObj[roleId] === "superadmin" ? list : [
+        ...list.filter(item => item.username === username),
+        ...list.filter(item => item.region === region && roleObj[item.roleId] === "editor")
+      ])
     })
   }, [])
   // 请求角色列表
@@ -36,6 +49,7 @@ export default function UserList() {
       list.forEach(item => {  //字段映射
         item.label = item.roleName
         item.value = item.id  //取值使用 id
+        item.disabled = roleObj[roleId] !== "superadmin"  //true 时，不允许编辑: 只有超级管理员可以编辑
       });
       setRoleList(list)
     })
@@ -46,10 +60,11 @@ export default function UserList() {
       let list = res.data
       list.forEach(item => {  //字段映射
         item.label = item.title
-        item.value = item.id //取值使用id
-      });
-      setRegionList(list)
-      setDefaultRegion(list[0].id)
+        item.value = item.title //取值也使用 title
+      })
+      let defaultRegion = { label: "全球", value: "" }
+      setRegionList([defaultRegion, ...list])
+      setDefaultRegion(defaultRegion.label)
     })
   }, [])
 
@@ -174,7 +189,7 @@ export default function UserList() {
     // post 提交后端新增用户，生成新的主键 id -> 用于后续的编辑和删除
     axios.post(`http://localhost:5000/users`, {
       ...values,
-      "region": values.region.label,
+      "region": values.region.label === "全球" ? "" : values.region.label,
       "roleState": true,
       "default": false,
     }).then(res => {
@@ -212,10 +227,7 @@ export default function UserList() {
     console.log("更新 form 表单 json: ", values);
     setUpdate(false)
     // 同步后端
-    axios.patch(`http://localhost:5000/users/${currentUpdate.id}`, {
-      ...values,
-      region: regionList.find(r => r.id === values.region).title, // updateForm 传过来的 region 是数字，需要转换；更新 数据库
-    }).then(res => {
+    axios.patch(`http://localhost:5000/users/${currentUpdate.id}`, values).then(res => {
       console.log(res);
       if (res.status === 200) {
         // 请求成功，更新 DOM 列表 dataSource
@@ -224,7 +236,6 @@ export default function UserList() {
             return {
               ...item,
               ...values,
-              region: regionList.find(r => r.id === values.region).title,  // updateForm 传过来的 region 是数字，需要转换; 更新 DOM
               role: roleList.filter(r => r.id === values.roleId)[0]
             }
           }

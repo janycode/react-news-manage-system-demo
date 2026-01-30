@@ -47,8 +47,10 @@ function SideMenu(props) {
     };
 
     // 拥有页面权限的进行返回展示
+    let { role: { rights } } = JSON.parse(localStorage.getItem("token"))
+    // console.log("rights=", rights);
     const checkPagePermission = (list) => {
-        return list.filter(item => item.pagepermisson === 1)
+        return list.filter(item => item.pagepermisson === 1 && rights.includes(item.key))
     }
 
     // 配置侧边栏菜单内容，key 值用于高亮和跳转需要唯一
