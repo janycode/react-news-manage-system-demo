@@ -105,9 +105,9 @@ function NewsDraft(props) {
   const deleteMethod = (item) => {
     console.log("删除 id：", item.id);
     //页面同步删除 state + 后端同步 删除
-    setDataSource(dataSource.filter(data => data.id !== item.id))
     axios.delete(`/news/${item.id}`).then(res => {
       if (res.status === 200) {
+        setDataSource(dataSource.filter(data => data.id !== item.id))
         message.success("删除成功！")
       }
     })

@@ -66,7 +66,7 @@ function SideMenu(props) {
             .filter(item => item.pagepermisson === 1) // 父级先过滤pagepermisson===1
             .map(item => filterMenu(item)) // 对每个父级，递归处理其子级
             // 边界处理：过滤后子级为空的父级（可选，根据业务是否保留空children父级）
-            .filter(item => !item.children || item.children.length > 0);
+            //.filter(item => !item.children || item.children.length > 0);
 
         console.log("用户菜单权限列表:", res);
         return res;

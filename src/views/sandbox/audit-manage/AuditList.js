@@ -13,6 +13,9 @@ export default function AuditList(props) {
     })
   }, [username])
 
+  const auditList = ["未审核", "审核中", "已通过", "未通过"]
+  const publishList = ["未发布", "待发布", "已上线", "已下线"]
+  const colorList = ["gray", "orange", "green", "red"]
   const columns = [
     {
       title: 'ID',
@@ -31,11 +34,11 @@ export default function AuditList(props) {
         return <a href={`#/news-manage/preview/${item.id}`}>{title}</a>
       }
     },
-    {
-      title: '作者',
-      dataIndex: 'author',
-      key: 'author',
-    },
+    // {
+    //   title: '作者',
+    //   dataIndex: 'author',
+    //   key: 'author',
+    // },
     {
       title: '分类',
       dataIndex: 'category',
@@ -49,9 +52,15 @@ export default function AuditList(props) {
       dataIndex: 'auditState',
       key: 'auditState',
       render: (auditState) => {
-        const colorList = ["gray", "orange", "green", "red"]
-        const auditList = ["未审核", "审核中", "已通过", "未通过"]
         return <Tag style={{ color: colorList[auditState] }}>{auditList[auditState]}</Tag>
+      }
+    },
+    {
+      title: '发布状态',
+      dataIndex: 'publishState',
+      key: 'publishState',
+      render: (publishState) => {
+        return <Tag style={{ color: colorList[publishState] }}>{publishList[publishState]}</Tag>
       }
     },
     {
@@ -73,11 +82,11 @@ export default function AuditList(props) {
   ];
 
   const handleRevert = (item) => {
-    setDataSource(dataSource.filter(data => data.id !== item.id))
     axios.patch(`/news/${item.id}`, {
       auditState: 0
     }).then(res => {
       if (res.status === 200) {
+        setDataSource(dataSource.filter(data => data.id !== item.id))
         message.success("撤销成功！草稿箱中查看...")
       }
     })
@@ -94,6 +103,7 @@ export default function AuditList(props) {
       if (res.status === 200) {
         message.success("发布成功！")
         //props.history.push("/publish-manage/published")  //可跳转，可不跳转
+        setDataSource(dataSource.filter(data => data.id !== item.id))
       }
     })
   }

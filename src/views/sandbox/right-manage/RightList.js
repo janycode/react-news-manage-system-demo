@@ -3,7 +3,7 @@ import {
   EditOutlined,
   ExclamationCircleFilled
 } from '@ant-design/icons';
-import { Button, Table, Tag, Modal, Popover, Switch } from 'antd';
+import { Button, Table, Tag, Modal, Popover, Switch, message } from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -99,8 +99,12 @@ export default function RightList() {
     console.log("删除 id：", item.id);
     //页面同步删除 state + 后端同步 删除
     if (item.grade === 1) { //删除一级
-      setDataSource(dataSource.filter(data => data.id !== item.id))
-      axios.delete(`http://localhost:5000/rights/${item.id}`)
+      axios.delete(`http://localhost:5000/rights/${item.id}`).then(res => {
+        if (res.status === 200) {
+          message.success("删除成功")
+          setDataSource(dataSource.filter(data => data.id !== item.id))
+        }
+      })
     } else { //删除二级
       console.log(item.rightId);
       let list = dataSource.filter(data => data.id === item.rightId)

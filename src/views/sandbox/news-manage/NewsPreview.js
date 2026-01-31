@@ -1,3 +1,6 @@
+import {
+    LeftOutlined
+} from '@ant-design/icons';
 import { Descriptions } from 'antd';
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -72,9 +75,10 @@ export default function NewsPreview(props) {
             ),
         },
     ];
-  return (
-      <div>
-          <Descriptions title="内容预览" bordered items={items} />
-    </div>
-  )
+    return (
+        <div>
+            <h2><a style={{ marginRight: '10px' }} onClick={() => props.history.goBack()}><LeftOutlined /></a>内容预览</h2>
+            <Descriptions /* title="内容预览" */ bordered items={items} />
+        </div>
+    )
 }
