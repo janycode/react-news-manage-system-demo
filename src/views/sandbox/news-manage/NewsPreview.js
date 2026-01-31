@@ -16,6 +16,7 @@ export default function NewsPreview(props) {
 
     const auditList = ["未审核", "审核中", "已通过", "未通过"]
     const publishList = ["未发布", "待发布", "已上线", "已下线"]
+    const colorList = ["gray", "orange", "green", "red"]
     const items = [
         {
             key: '1',
@@ -40,12 +41,12 @@ export default function NewsPreview(props) {
         {
             key: '5',
             label: '审核状态',
-            children: <p style={{color: 'red'}}>{auditList[newsInfo.auditState]}</p>,
+            children: <p style={{ color: colorList[newsInfo.auditState] }}>{auditList[newsInfo.auditState]}</p>,
         },
         {
             key: '6',
             label: '发布状态',
-            children: <p style={{ color: 'red' }}>{publishList[newsInfo.publishState]}</p>,
+            children: <p style={{ color: colorList[newsInfo.publishState] }}>{publishList[newsInfo.publishState]}</p>,
         },
         {
             key: '7',
