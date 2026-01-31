@@ -14,6 +14,8 @@ import Unpublished from '../../views/sandbox/publish-manage/Unpublished'
 import RightList from '../../views/sandbox/right-manage/RightList'
 import RoleList from '../../views/sandbox/right-manage/RoleList'
 import UserList from '../../views/sandbox/user-manage/UserList'
+import NewsPreview from '../../views/sandbox/news-manage/NewsPreview'
+import NewsUpdate from '../../views/sandbox/news-manage/NewsUpdate'
 
 // 路由与组件 本地映射
 const LocalRouterMap = {
@@ -24,6 +26,8 @@ const LocalRouterMap = {
     "/news-manage/add": NewsAdd,
     "/news-manage/draft": NewsDraft,
     "/news-manage/category": NewsCategory,
+    "/news-manage/preview/:id": NewsPreview,
+    "/news-manage/update/:id": NewsUpdate,
     "/audit-manage/audit": Audit,
     "/audit-manage/list": AuditList,
     "/publish-manage/unpublished": Unpublished,
@@ -48,8 +52,8 @@ export default function NewsRrouter() {
 
     const {role: {rights}} = JSON.parse(localStorage.getItem("token"))
     const checkRoute = (item) => {
-        //检查本地有，且 pagepermisson 为 1
-        return LocalRouterMap[item.key] && item.pagepermisson
+        //检查本地有，且 pagepermisson 为 1 或 routepermisson 为 1
+        return LocalRouterMap[item.key] && (item.pagepermisson || item.routepermisson)
     }
     const checkUserPermisson = (item) => {
         // 当前用户权限列表

@@ -48,17 +48,29 @@ function SideMenu(props) {
     // console.log("rights=", rights);
     const checkPagePermission = (list) => {
         console.log("user rights:", rights);
-        let res = list.filter(item => {
-            //子级权限也需要过滤
-            item.children = item.children.filter(citem => rights.includes(citem.key))
-            // console.log("item.children=", item.children);
-            if (item.pagepermisson === 1) {
-                return item
+        // 定义递归函数：处理单个菜单（父级/子级通用）
+        const filterMenu = (menuItem) => {
+            // 1. 先过滤当前菜单的子级children（递归调用，子级的子级也会被过滤）
+            if (menuItem.children && menuItem.children.length > 0) {
+                // 子级过滤规则：pagepermisson===1 + 权限rights包含其key
+                menuItem.children = menuItem.children
+                    .filter(citem => citem.pagepermisson === 1 && rights.includes(citem.key))
+                    .map(child => filterMenu(child)); // 递归处理子级的children
             }
-        })
+            // 2. 返回当前菜单（父级过滤规则：pagepermisson===1）
+            return menuItem;
+        };
+
+        // 主逻辑：过滤父级 + 递归处理所有子级
+        let res = list
+            .filter(item => item.pagepermisson === 1) // 父级先过滤pagepermisson===1
+            .map(item => filterMenu(item)) // 对每个父级，递归处理其子级
+            // 边界处理：过滤后子级为空的父级（可选，根据业务是否保留空children父级）
+            .filter(item => !item.children || item.children.length > 0);
+
         console.log("用户菜单权限列表:", res);
-        return res
-    }
+        return res;
+    };
 
     // 配置侧边栏菜单内容，key 值用于高亮和跳转需要唯一
     // const items = [

@@ -1,4 +1,7 @@
-import { Button, Form, Input, Select, Steps, message, notification } from 'antd';
+import {
+  LeftOutlined
+} from '@ant-design/icons';
+import { Button, Form, Input, Select, Steps, message } from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
@@ -8,7 +11,7 @@ import style from './News.module.scss';
 function NewsAdd(props) {
   const [current, setCurrent] = useState(0);
   const [categoryList, setCategoryList] = useState([])
-  const [selectedCategoryId, setSelectedCategoryId] = useState(0)
+  const [selectedCategoryId, setSelectedCategoryId] = useState("1")
   const [form] = Form.useForm();
   const [formInfo, setFormInfo] = useState({})
   const [content, setContent] = useState("")
@@ -54,8 +57,9 @@ function NewsAdd(props) {
   const handleNext = () => {
     // 先校验，再允许下一步
     if (current === 0) {
+      // form 表单校验通过才会执行 then
       form.validateFields().then(res => {
-        console.log(res);
+        //console.log(res);
         setFormInfo(res) //存 form 表单的数据
         setCurrent(current + 1)
       }).catch(err => {
@@ -82,7 +86,7 @@ function NewsAdd(props) {
     setSelectedCategoryId(id)
   }
   const onCreate = (values) => {
-    console.log(values);
+    // console.log(values);
   }
 
   const handleSaveDraft = (auditState) => {
@@ -108,8 +112,8 @@ function NewsAdd(props) {
   }
   return (
     <div>
-      <h2>撰写新闻</h2>
-      <div>
+      <h2><a style={{ marginRight: '10px' }} onClick={() => props.history.goBack()}><LeftOutlined /></a>撰写新闻</h2>
+      <div style={{ marginTop: '50px' }}>
         <Steps current={current} /* status="error" */ items={items} onChange={onChange} />
       </div>
 

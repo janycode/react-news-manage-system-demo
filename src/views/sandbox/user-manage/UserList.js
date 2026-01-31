@@ -67,12 +67,13 @@ export default function UserList() {
       setRegionList(list)
       // 核心修复：异步请求完成后，用 form.setFieldsValue 设置默认值
       if (list.length > 0) {
+        //Warning: Instance created by `useForm` is not connected to any Form element. Forget to pass `form` prop?
         form.setFieldsValue({
           region: list[0].label,
         });
       }
     })
-  }, [])
+  }, [form])
 
   const columns = [
     {

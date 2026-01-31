@@ -9,6 +9,13 @@ import { ConfigProvider } from 'antd';
 
 import './util/http'
 
+import moment from 'moment';
+import 'moment-timezone'; // 引入时区扩展
+// 全局设置默认时区为中国上海（UTC+8）
+moment.tz.setDefault('Asia/Shanghai');
+// 可选：全局设置中文语言（格式化后的星期、月份为中文，如「2026年01月31日 星期六」）
+moment.locale('zh-cn');
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
