@@ -108,7 +108,6 @@
         "/right-manage/role/list",
         "/right-manage/right/list",
         "/news-manage",
-        "/news-manage/add",
         "/news-manage/draft",
         "/news-manage/category",
         "/audit-manage",
@@ -119,7 +118,8 @@
         "/publish-manage/published",
         "/publish-manage/sunset",
         "/user-manage",
-        "/home"
+        "/home",
+        "/news-manage/add"
       ]
     },
     {
@@ -257,6 +257,7 @@
       "label": "撰写新闻",
       "rightId": "14",
       "key": "/news-manage/add",
+      "pagepermisson": 1,
       "grade": 2
     },
     {
@@ -578,6 +579,81 @@
       "view": 6,
       "id": "9",
       "publishTime": 1616203519274
+    },
+    {
+      "id": "0191",
+      "title": "测试新闻",
+      "categoryId": 0,
+      "content": "<p>测试新闻打撒福达坊大是大非多发</p>\n",
+      "region": "全球",
+      "author": "admin",
+      "roleId": "1",
+      "auditState": 0,
+      "publishState": 0,
+      "createTime": 1769840182651,
+      "star": 0,
+      "view": 0,
+      "publishTime": 0
+    },
+    {
+      "id": "11a6",
+      "title": "测试新闻222",
+      "categoryId": "2",
+      "content": "<p>撒旦法撒旦发啥打法撒旦法撒旦发</p>\n",
+      "region": "全球",
+      "author": "admin",
+      "roleId": "1",
+      "auditState": 1,
+      "publishState": 0,
+      "createTime": 1769840222417,
+      "star": 0,
+      "view": 0,
+      "publishTime": 0
+    },
+    {
+      "id": "4487",
+      "title": "测试新闻333",
+      "categoryId": "3",
+      "content": "<p>撒旦法撒旦法撒旦发撒旦法撒旦发是达发放</p>\n",
+      "region": "全球",
+      "author": "admin",
+      "roleId": "1",
+      "auditState": 0,
+      "publishState": 0,
+      "createTime": 1769840291935,
+      "star": 0,
+      "view": 0,
+      "publishTime": 0
+    },
+    {
+      "id": "cd46",
+      "title": "测试新闻555",
+      "categoryId": "5",
+      "content": "<p>撒旦法撒旦发撒旦法阿凤 5555555555555555</p>\n",
+      "region": "全球",
+      "author": "admin",
+      "roleId": "1",
+      "auditState": 0,
+      "publishState": 0,
+      "createTime": 1769840390606,
+      "star": 0,
+      "view": 0,
+      "publishTime": 0
+    },
+    {
+      "id": "e10a",
+      "title": "测试新闻666",
+      "categoryId": "6",
+      "content": "<p>撒旦法撒旦发撒旦法 66666666666666666</p>\n",
+      "region": "全球",
+      "author": "admin",
+      "roleId": "1",
+      "auditState": 1,
+      "publishState": 0,
+      "createTime": 1769840404677,
+      "star": 0,
+      "view": 0,
+      "publishTime": 0
     }
   ]
 }

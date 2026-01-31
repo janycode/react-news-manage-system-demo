@@ -2,6 +2,8 @@ import { Redirect, Route, Switch } from 'react-router-dom'
 import Audit from '../../views/sandbox/audit-manage/Audit'
 import AuditList from '../../views/sandbox/audit-manage/AuditList'
 import Home from '../../views/sandbox/home/Home'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import NewsAdd from '../../views/sandbox/news-manage/NewsAdd'
 import NewsCategory from '../../views/sandbox/news-manage/NewsCategory'
 import NewsDraft from '../../views/sandbox/news-manage/NewsDraft'
@@ -12,8 +14,6 @@ import Unpublished from '../../views/sandbox/publish-manage/Unpublished'
 import RightList from '../../views/sandbox/right-manage/RightList'
 import RoleList from '../../views/sandbox/right-manage/RoleList'
 import UserList from '../../views/sandbox/user-manage/UserList'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
 
 // 路由与组件 本地映射
 const LocalRouterMap = {

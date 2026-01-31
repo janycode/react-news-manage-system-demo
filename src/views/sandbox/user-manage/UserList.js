@@ -63,8 +63,14 @@ export default function UserList() {
         item.value = item.title //取值也使用 title
       })
       let defaultRegion = { label: "全球", value: "" }
-      setRegionList([defaultRegion, ...list])
-      setDefaultRegion(defaultRegion.label)
+      list = [defaultRegion, ...list]
+      setRegionList(list)
+      // 核心修复：异步请求完成后，用 form.setFieldsValue 设置默认值
+      if (list.length > 0) {
+        form.setFieldsValue({
+          region: list[0].label,
+        });
+      }
     })
   }, [])
 
@@ -269,7 +275,7 @@ export default function UserList() {
             layout="vertical"
             form={form}
             name="form_in_modal"
-            initialValues={{ region: defaultRegion }}  /* 默认值字段：区域 */
+            //initialValues={{ region: defaultRegion }}  移除 initialValues！异步场景用 form.setFieldsValue 替代
             clearOnDestroy
             onFinish={values => onCreate(values)}  /* values 即 form 表单所有字段值，用于提交后端 */
           >
