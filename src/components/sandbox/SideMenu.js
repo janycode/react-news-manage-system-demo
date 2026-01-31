@@ -14,7 +14,7 @@ function SideMenu(props) {
     const [menu, setMenu] = useState([])
     useEffect(() => {
         axios.get("http://localhost:5000/rights?_embed=children").then(res => {
-            console.log(res.data);
+            // console.log(res.data);
             setMenu(addMenuIcon(checkPagePermission(res.data)))
         })
     }, [])
@@ -47,7 +47,17 @@ function SideMenu(props) {
     let { role: { rights } } = JSON.parse(localStorage.getItem("token"))
     // console.log("rights=", rights);
     const checkPagePermission = (list) => {
-        return list.filter(item => item.pagepermisson === 1 && rights.includes(item.key))
+        console.log("user rights:", rights);
+        let res = list.filter(item => {
+            //子级权限也需要过滤
+            item.children = item.children.filter(citem => rights.includes(citem.key))
+            // console.log("item.children=", item.children);
+            if (item.pagepermisson === 1) {
+                return item
+            }
+        })
+        console.log("用户菜单权限列表:", res);
+        return res
     }
 
     // 配置侧边栏菜单内容，key 值用于高亮和跳转需要唯一
@@ -90,12 +100,12 @@ function SideMenu(props) {
     //console.log(openMenuKeys); // eg: ['/user-manage']
     return (
         <Sider trigger={null} collapsible collapsed={collapsed}>
-            <div style={{display: 'flex', height: '100%', flexDirection: 'column'}}>
+            <div style={{ display: 'flex', height: '100%', flexDirection: 'column' }}>
                 <div className="logo">
                     <Avatar size="large" icon={<UserOutlined />} />
                     <span style={{ margin: '5px' }}>新闻发布系统</span>
                 </div>
-                <Menu style={{flex: '1', overflow: 'auto'}}
+                <Menu style={{ flex: '1', overflow: 'auto' }}
                     onClick={onMenuClick}
                     theme="dark"
                     mode="inline"

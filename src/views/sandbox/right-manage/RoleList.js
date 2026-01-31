@@ -98,7 +98,7 @@ export default function RoleList() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOk = () => {
-    console.log(currentRights);
+    console.log("currentRights=", currentRights); // currentRights.checked 是最终列表，提交接口时需要注意
     setIsModalOpen(false)
     //同步 dataSource
     setDataSource(dataSource.map(item => {
@@ -109,7 +109,7 @@ export default function RoleList() {
     }))
     // patch 同步给后端
     axios.patch(`http://localhost:5000/roles/${currentId}`, {
-      rights: currentRights
+      rights: currentRights.checked
     }).then(res => {
       console.log(res);
     })
