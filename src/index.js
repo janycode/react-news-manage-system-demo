@@ -7,6 +7,8 @@ import zhCN from 'antd/locale/zh_CN'; //国际化，支持中文（如筛选是�
 import 'dayjs/locale/zh-cn';  // for date-picker i18n
 import { ConfigProvider } from 'antd';
 
+import './util/http'
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>

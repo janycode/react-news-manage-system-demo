@@ -1,15 +1,12 @@
 import {
-    BarsOutlined,
-    UserOutlined,
-    HomeOutlined,
-    ApartmentOutlined
+    UserOutlined
 } from '@ant-design/icons';
-import { Layout, Menu, Avatar } from 'antd';
+import { Avatar, Layout, Menu } from 'antd';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
-import './index.min.css'
 import { withRouter } from 'react-router-dom';
-import axios from 'axios'
 import IconList from '../../config/IconList';
+import './index.min.css';
 
 const { Sider } = Layout;
 

@@ -16,7 +16,7 @@ function TopHeader(props) {
     } = theme.useToken();
 
     // 解构登陆用户信息
-    const { role: { roleName }, username } = JSON.parse(localStorage.getItem("token"))
+    const { role: { roleType, roleName }, username } = JSON.parse(localStorage.getItem("token"))
 
     const items = [
         {
@@ -32,9 +32,12 @@ function TopHeader(props) {
         {
             key: '3',
             label: (
-                <a rel="noopener noreferrer" href="#/right-manage/right/list">
-                    权限设置
-                </a>
+                // 只有超级管理员有权限设置
+                roleType === 1 && (
+                    <a rel="noopener noreferrer" href="#/right-manage/right/list">
+                        权限设置
+                    </a>
+                )
             ),
         },
         {
